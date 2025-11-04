@@ -10,6 +10,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String(50), unique=True, nullable=False, index=True)
     email = Column(String(100), unique=True, nullable=False, index=True)
+    hashed_password = Column(String(255), nullable=False)
 
     articles = relationship("Article", back_populates="author", cascade="all, delete-orphan")
     comments = relationship("Comment", back_populates="author", cascade="all, delete-orphan")
@@ -20,8 +21,8 @@ class Article(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(200), nullable=False, index=True)
     content = Column(String, nullable=False)
-    category = Column(String(30), server_default="All", index=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    category = Column(String(30), index=True, nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     author_id = Column(Integer, ForeignKey('users.id', ondelete="CASCADE"), nullable=False)
     
@@ -33,7 +34,7 @@ class Comment(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     content = Column(String, nullable=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     author_id = Column(Integer, ForeignKey('users.id', ondelete="CASCADE"), nullable=False)
     article_id = Column(Integer, ForeignKey('articles.id', ondelete="CASCADE"), nullable=False)
