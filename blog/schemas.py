@@ -1,6 +1,13 @@
 from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
+from enum import Enum
+
+class ArticleCategory(Enum):
+    programming = "Programming"
+    mathematics = "Mathematics"
+    graphics = "Graphics"
+    other = "Other"
 
 class UserCreate(BaseModel):
     username : str
@@ -18,18 +25,18 @@ class UserResponse(BaseModel):
 class ArticleCreate(BaseModel):
     title: str
     content: str
-    category: str
+    category: ArticleCategory
 
 class ArticleUpdate(BaseModel):
     title: Optional[str] = None
     content: Optional[str] = None
-    category: Optional[str] = None
+    category: Optional[ArticleCategory] = None
 
 class ArticleResponse(BaseModel):
     id: int
     title: str
     content: str
-    category: str
+    category: ArticleCategory
     created_at: datetime
     author_id: int
 
