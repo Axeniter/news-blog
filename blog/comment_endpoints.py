@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi import APIRouter, Query, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import Optional, List
+from typing import List
 from schemas import CommentResponse, CommentCreate, CommentUpdate
 from models import Comment, Article, User
 from database import get_db
