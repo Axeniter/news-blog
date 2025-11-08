@@ -12,7 +12,7 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_LIVE_MINUTES = 30
 REFRESH_TOKEN_LIVE_DAYS = 7
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 security = HTTPBearer()
 
 def verify_password(plain_password, hashed_password):
