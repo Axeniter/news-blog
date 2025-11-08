@@ -1,35 +1,33 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, EmailStr
 from typing import Optional
 from datetime import datetime
-from enum import Enum
-
-class ArticleCategory(Enum):
-    programming = "Programming"
-    mathematics = "Mathematics"
-    graphics = "Graphics"
-    other = "Other"
+from models import ArticleCategory
 
 class UserCreate(BaseModel):
-    username : str
-    email: str
-    password : str
+    username: str = Field(min_length=2, max_length=50)
+    email: EmailStr = Field(max_length=100)
+    password: str = Field(min_length=1, max_length=255)
+
+class UserLogin(BaseModel):
+    username: str = Field(min_length=2, max_length=50)
+    password: str = Field(min_length=1, max_length=255)
 
 class UserResponse(BaseModel):
-    id : int
-    username : str
-    email : str
+    id: int
+    username: str
+    email: str
 
     class Config:
         from_attributes = True
 
 class ArticleCreate(BaseModel):
-    title: str
-    content: str
+    title: str = Field(min_length=1, max_length=200)
+    content: str = Field(min_length=1)
     category: ArticleCategory
 
 class ArticleUpdate(BaseModel):
-    title: Optional[str] = None
-    content: Optional[str] = None
+    title: Optional[str] = Field(None, min_length=1, max_length=200)
+    content: Optional[str] = Field(None, min_length=1)
     category: Optional[ArticleCategory] = None
 
 class ArticleResponse(BaseModel):
@@ -44,11 +42,11 @@ class ArticleResponse(BaseModel):
         from_attributes = True
 
 class CommentCreate(BaseModel):
-    content: str
+    content: str = Field(min_length=1)
     article_id: int
 
 class CommentUpdate(BaseModel):
-    content: Optional[str] = None
+    content: Optional[str] = Field(None, min_length=1)
 
 class CommentResponse(BaseModel):
     id: int
@@ -64,7 +62,3 @@ class Token(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str
-
-class TokenData(BaseModel):
-    user_id: Optional[str] = None
-    username: Optional[str] = None

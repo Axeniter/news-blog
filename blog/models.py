@@ -1,6 +1,13 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Enum
 from sqlalchemy.orm import DeclarativeBase, relationship
 from sqlalchemy.sql import func
+from enum import Enum as PyEnum
+
+class ArticleCategory(PyEnum):
+    programming = "Programming"
+    mathematics = "Mathematics"
+    graphics = "Graphics"
+    other = "Other"
 
 class Base(DeclarativeBase) : pass
 
@@ -21,7 +28,7 @@ class Article(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(200), nullable=False, index=True)
     content = Column(String, nullable=False)
-    category = Column(String(30), index=True, nullable=False)
+    category = Column(Enum(ArticleCategory), index=True, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
 
     author_id = Column(Integer, ForeignKey('users.id', ondelete="CASCADE"), nullable=False)
