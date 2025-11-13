@@ -1,7 +1,6 @@
 from pydantic import BaseModel, Field, EmailStr
 from typing import Optional
 from datetime import datetime
-from models import ArticleCategory
 
 class UserCreate(BaseModel):
     username: str = Field(min_length=2, max_length=50)
@@ -23,18 +22,18 @@ class UserResponse(BaseModel):
 class ArticleCreate(BaseModel):
     title: str = Field(min_length=1, max_length=200)
     content: str = Field(min_length=1)
-    category: ArticleCategory
+    category: str
 
 class ArticleUpdate(BaseModel):
     title: Optional[str] = Field(None, min_length=1, max_length=200)
     content: Optional[str] = Field(None, min_length=1)
-    category: Optional[ArticleCategory] = None
+    category: Optional[str] = None
 
 class ArticleResponse(BaseModel):
     id: int
     title: str
     content: str
-    category: ArticleCategory
+    category: str
     created_at: datetime
     author_id: int
 
