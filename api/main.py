@@ -4,6 +4,7 @@ from fastapi.responses import HTMLResponse
 from auth_endpoints import auth_router
 from comment_endpoints import comment_router
 from article_endpoints import article_router
+from user_endpoints import user_router
 from database import create_tables
 
 app = FastAPI()
@@ -12,6 +13,7 @@ create_tables()
 app.include_router(article_router)
 app.include_router(comment_router)
 app.include_router(auth_router)
+app.include_router(user_router)
 
 app.add_middleware(
     CORSMiddleware,
