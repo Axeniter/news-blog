@@ -5,7 +5,7 @@ import "./ArticleCard.css";
 
 const ArticleCard = ({ article, onDelete }) => {
   const { user } = useAuth();
-  const isAuthor = user && user.id === article.author_id;
+  const isAuthor = user && user.id === article.author.id;
 
   const handleDelete = async () => {
     if (window.confirm("Are you sure you want to delete this article?")) {
