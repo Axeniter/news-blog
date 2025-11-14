@@ -6,7 +6,6 @@ import "./ArticleDetail.css";
 
 const ArticleDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { user } = useAuth();
 
   const [article, setArticle] = useState(null);
