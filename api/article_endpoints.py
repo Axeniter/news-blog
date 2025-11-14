@@ -69,7 +69,7 @@ def update_article(article_id: int, data: ArticleUpdate,
     db.refresh(updated_article)
     return updated_article
 
-@article_router.delete("/api/articles/{article_id}")
+@article_router.delete("/{article_id}")
 def delete_article(article_id: int, db: Session = Depends(get_db),
                     current_user: User = Depends(get_current_user)):
     article = db.query(Article).filter(Article.id == article_id).first()
