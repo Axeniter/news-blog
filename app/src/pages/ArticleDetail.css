@@ -122,6 +122,50 @@
   margin: 0;
 }
 
+.comment .delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.edit-btn {
+  background-color: #6786EE;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.edit-btn:hover {
+  background-color: #5F7BDA;
+  transform: translateY(-2px);
+}
+
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+.article-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: flex-end;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
 .comment .delete-btn {
   background-color: #e74c3c;
   color: white;
@@ -132,8 +176,4 @@
   font-size: 0.8rem;
   margin-top: 0.5rem;
   transition: all 0.3s ease;
-}
-
-.comment .delete-btn:hover {
-  background-color: #c0392b;
 }

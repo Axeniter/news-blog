@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { articlesAPI, commentsAPI } from "../api/services";
 import { useAuth } from "../context/AuthContext";
 import "./ArticleDetail.css";
@@ -61,6 +61,20 @@ const ArticleDetail = () => {
       setComments(comments.filter((comment) => comment.id !== commentId));
     } catch (err) {
       setError("Error deleting comment");
+      console.error("Error:", error)
+    }
+  };
+
+  const handleDeleteArticle = async () => {
+    if (!window.confirm("Are you sure you want to delete this article?")) {
+      return;
+    }
+
+    try {
+      await articlesAPI.delete(id);
+      navigate("/articles");
+    } catch (err) {
+      setError("Error deleting article");
     }
   };
 
@@ -74,6 +88,7 @@ const ArticleDetail = () => {
     });
   };
 
+  const isAuthor = user && user.id === article?.author?.id;
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
   if (!article) return <div>Article not found</div>;
@@ -93,6 +108,17 @@ const ArticleDetail = () => {
         <div className="article-content">
           <p>{article.content}</p>
         </div>
+
+        {isAuthor && (
+        <div className="article-actions">
+          <Link to={`/articles/${article.id}/edit`} className="edit-btn">
+                        Edit
+          </Link>
+          <button onClick={handleDeleteArticle} className="delete-btn">
+            Delete Article
+          </button>
+        </div>
+      )}
       </article>
 
       <section className="comments-section">
