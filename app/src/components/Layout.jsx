@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Layout.css";
+import logo from "../assets/react.svg"
 
 const Layout = ({ children }) => {
   const { user, logout, isAuthenticated } = useAuth();
@@ -17,7 +18,8 @@ const Layout = ({ children }) => {
       <header className="header">
         <div className="container">
           <Link to="/" className="logo">
-            ReactiveBlog
+            <img src={logo} className="logo-image"/>
+            <span>ReactiveBlog</span>
           </Link>
           <nav className="nav">
             <Link to="/">Home</Link>
