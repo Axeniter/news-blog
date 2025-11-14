@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { articlesAPI } from "../api/services";
 import ArticleForm from "../components/ArticleForm";
 import { useAuth } from "../context/AuthContext";
