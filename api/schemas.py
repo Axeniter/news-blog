@@ -14,7 +14,6 @@ class UserLogin(BaseModel):
 class UserResponse(BaseModel):
     id: int
     username: str
-    email: str
 
     class Config:
         from_attributes = True
@@ -35,7 +34,7 @@ class ArticleResponse(BaseModel):
     content: str
     category: str
     created_at: datetime
-    author_id: int
+    author : UserResponse
 
     class Config:
         from_attributes = True
@@ -51,8 +50,8 @@ class CommentResponse(BaseModel):
     id: int
     content: str
     created_at: datetime
-    author_id: int
     article_id: int
+    author: UserResponse
 
     class Config:
         from_attributes = True

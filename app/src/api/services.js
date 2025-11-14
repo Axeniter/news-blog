@@ -18,6 +18,7 @@ export const articlesAPI = {
 export const commentsAPI = {
   getAll: () => api.get("/comments/"),
   getById: (id) => api.get(`/comments/${id}`),
+  getByArticleId: (id) => api.get(`/articles/${id}/comments`),
   create: (commentData) => api.post("/comments/", commentData),
   update: (id, commentData) => api.put(`/comments/${id}`, commentData),
   delete: (id) => api.delete(`/comments/${id}`),
