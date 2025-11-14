@@ -22,3 +22,8 @@ export const commentsAPI = {
   update: (id, commentData) => api.put(`/comments/${id}`, commentData),
   delete: (id) => api.delete(`/comments/${id}`),
 };
+
+export const usersAPI = {
+  getAll: () => api.get("/users/"),
+  getById: (id) => api.get(`/users/${id}`)
+};

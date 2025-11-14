@@ -50,10 +50,10 @@ def refresh_token(refresh_token: str, db: Session = Depends(get_db)):
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
         
         data = {"user_id": user.id, "username": user.username}
-        access_token = create_access_token(data)
+        new_access_token = create_access_token(data)
         new_refresh_token = create_refresh_token(data)
         
-        return {"access_token": access_token, "refresh_token": new_refresh_token, "token_type": "bearer"}
+        return {"access_token": new_access_token, "refresh_token": new_refresh_token, "token_type": "bearer"}
     
     except (jwt.ExpiredSignatureError, jwt.InvalidTokenError):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid refresh token")
