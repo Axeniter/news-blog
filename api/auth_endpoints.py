@@ -35,9 +35,9 @@ def login(data: UserLogin, db: Session = Depends(get_db)):
     return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
 
 @auth_router.post("/token/refresh", response_model=Token)
-def refresh_token(refresh_token: str, db: Session = Depends(get_db)):
+def refresh_token(data : dict, db: Session = Depends(get_db)):
     try:
-        payload = verify_token(refresh_token)
+        payload = verify_token(data["refresh_token"])
         if payload.get("type") != "refresh":
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token type")
         
